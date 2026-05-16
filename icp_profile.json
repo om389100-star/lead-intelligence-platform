@@ -1,0 +1,19 @@
+{
+  "industry": "AI / Data / SaaS",
+  "geo": "US / Europe",
+  "company_size": "10-200",
+  "target_roles": [
+    "Data Engineer",
+    "ML Engineer",
+    "Data Architect",
+    "Analytics Engineer"
+  ],
+  "signals": [
+    "hiring",
+    "cloud migration",
+    "data platform",
+    "spark",
+    "databricks",
+    "lakehouse"
+  ]
+}

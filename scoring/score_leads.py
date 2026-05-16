@@ -7,27 +7,31 @@ SCORED_DIR = "data/scored"
 
 os.makedirs(SCORED_DIR, exist_ok=True)
 
-
 def score_job(title):
     score = 0
     title_lower = str(title).lower()
 
-    if "data engineer" in title_lower:
-        score += 40
+    signals = {
+        "data engineer": 30,
+        "senior": 20,
+        "cloud": 25,
+        "machine learning": 25,
+        "platform": 20,
+        "spark": 30,
+        "dataproc": 35,
+        "pipeline": 20,
+        "distributed": 25,
+        "architect": 35,
+        "lakehouse": 30,
+        "analytics": 15
+    }
 
-    if "senior" in title_lower:
-        score += 20
-
-    if "cloud" in title_lower:
-        score += 20
-
-    if "spark" in title_lower:
-        score += 10
-
-    if "architect" in title_lower:
-        score += 25
+    for keyword, value in signals.items():
+        if keyword in title_lower:
+            score += value
 
     return score
+
 
 
 files = glob.glob(f"{RAW_DIR}/*.csv")

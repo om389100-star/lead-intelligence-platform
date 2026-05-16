@@ -1,18 +1,29 @@
 import pandas as pd
-import os
 
 INPUT_FILE = "data/scored/scored_leads.csv"
 OUTPUT_FILE = "data/scored/enriched_leads.csv"
 
 
 def generate_insight(title, score):
-    if score >= 60:
-        return "High likelihood of active data infrastructure scaling. Strong consulting opportunity."
+    title_lower = str(title).lower()
 
-    elif score >= 30:
-        return "Moderate technical hiring activity. Worth monitoring for engagement."
+    if score >= 80:
+        return "Strong consulting opportunity: likely scaling critical data infrastructure."
+
+    elif score >= 50:
+        return "Moderate opportunity: technical growth suggests possible modernization needs."
 
     return "Low urgency signal."
+
+
+def generate_outreach(title, score):
+    if score >= 80:
+        return "Position distributed data platform optimization and cloud cost reduction."
+
+    elif score >= 50:
+        return "Offer infrastructure assessment and analytics pipeline review."
+
+    return "Monitor for stronger future intent signals."
 
 
 df = pd.read_csv(INPUT_FILE)
@@ -22,7 +33,12 @@ df["ai_insight"] = df.apply(
     axis=1
 )
 
+df["outreach_recommendation"] = df.apply(
+    lambda row: generate_outreach(row["title"], row["score"]),
+    axis=1
+)
+
 df.to_csv(OUTPUT_FILE, index=False)
 
-print("AI insights generated.")
+print("Insights + outreach recommendations generated.")
 print(df.head())
